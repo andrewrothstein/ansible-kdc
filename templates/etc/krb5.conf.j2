@@ -1,0 +1,27 @@
+[logging]
+ default = {{kdc_default_log}}
+ kdc = {{kdc_kdc_log}}
+ admin_server = {{kdc_admin_server_log}}
+
+[libdefaults]
+ dns_lookup_realm = {{kdc_dns_lookup_realm}}
+ ticket_lifetime = {{kdc_ticket_lifetime}}
+ renew_lifetime = {{kdc_renew_lifetime}}
+ forwardable = true
+ rdns = false
+ default_realm = {{kdc_realms[0].domain_uc}}
+ default_ccache_name = KEYRING:persistent:%{uid}
+
+[realms]
+{% for realm in kdc_realms %}
+{{realm.domain_uc}} = {
+ kdc = {{kdc_kdc}}:88
+ admin_server = {{kdc_kdc}}:749
+}
+{% endfor %}
+
+[domain_realm]
+{% for realm in kdc_realms %}
+ .{{realm.domain_lc}} = {{realm.domain_uc}}
+ {{realm.domain_lc}} = {{realm.domain_uc}}
+{% endfor %}

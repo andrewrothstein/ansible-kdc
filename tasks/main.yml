@@ -1,0 +1,21 @@
+---
+- name: install pkgs
+  become: yes
+  become_user: root
+  with_items:
+    - krb5-libs
+    - krb5-server
+    - krb5-workstation
+  package: name={{item}} state=present
+
+- name: configure...
+  become: yes
+  become_user: root
+  with_items:
+    - etc/krb5.conf
+    - var/kerberos/krb5kdc/kdc.conf
+    - var/kerberos/krb5kdc/kadm5.acl
+  template: >-
+    src={{item}}.j2
+    dest=/{{item}}
+    mode=0600
