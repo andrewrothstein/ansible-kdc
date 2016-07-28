@@ -14,4 +14,4 @@ kdc_default_log : FILE:/var/log/krb5libs.log
 kdc_kdc_log : FILE:/var/log/krb5kdc.log
 kdc_admin_server_log : FILE:/var/log/kadmind.log
 
-kdc_kdb_passwd : 'bf963a3a-5377-11e6-9652-989096e41e7c'
+kdc_kdb_passwd : bf963a3a-5377-11e6-9652-989096e41e7c

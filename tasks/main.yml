@@ -19,3 +19,11 @@
     src={{item}}.j2
     dest=/{{item}}
     mode=0600
+
+- name: build root principal
+  become: yes
+  become_user: root
+  command: >
+    kdb5_util create -s -P {{kdc_kdb_passwd}}
+  args:
+    creates: /var/kerberos/krb5kdc/principal
