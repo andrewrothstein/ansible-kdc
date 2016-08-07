@@ -1,14 +1,14 @@
 ---
 kdc_dns_lookup_realm : False
+kdc_forwardable : True
+kdc_rdns : False
 kdc_ticket_lifetime : '24h'
 kdc_renew_lifetime : '7d'
-kdc_forardable : True
 
 kdc_kdc : '{{inventory_hostname}}'
 kdc_realms:
   - domain_lc : example.com
     domain_uc : EXAMPLE.COM
-    supported_enctypes: 'aes256-cts:normal aes128-cts:normal des3-hmac-sha1:normal arcfour-hmac:normal camellia256-cts:normal camellia128-cts:normal des-hmac-sha1:normal des-cbc-md5:normal des-cbc-crc:normal'
 
 kdc_default_log : FILE:/var/log/krb5libs.log
 kdc_kdc_log : FILE:/var/log/krb5kdc.log

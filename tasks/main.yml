@@ -27,3 +27,16 @@
     kdb5_util create -s -P {{kdc_kdb_passwd}}
   args:
     creates: /var/kerberos/krb5kdc/principal
+
+- name: add an admin principal
+  becom: yes
+  become_user: root
+  with_items: '{{kdc_realms}}'
+  command: >-
+    kadmin.local add_principal -randkey root/admin@{{item.domain_uc}}
+
+- name: start services
+  with_items:
+    - krb5kdc
+    - kadmin
+  service: name={{item}} state=started
